@@ -40,6 +40,7 @@ ONBUILD ENV SECRET_KEY_BASE openssl rand -base64 32
 
 # export env vars during run time
 RUN mkdir -p /app/.profile.d/
-RUN echo "export PATH=\"/app/user/bin:/app/heroku/ruby/ruby-2.2.2/bin:/app/heroku/ruby/node-0.12.7/bin:/app/heroku/ruby/bundle/ruby/2.2.0/bin:$PATH\" GEM_PATH=\"/app/heroku/ruby/bundle/ruby/2.2.0\" GEM_HOME=\"/app/heroku/ruby/bundle/ruby/2.2.0\" RAILS_ENV=production SECRET_KEY_BASE=$(openssl rand -base64 32)" > /app/.profile.d/ruby.sh
+RUN echo "export PATH=\"/app/user/bin:/app/heroku/ruby/ruby-2.2.2/bin:/app/heroku/ruby/node-0.12.7/bin:/app/heroku/ruby/bundle/ruby/2.2.0/bin:$PATH\" GEM_PATH=\"/app/heroku/ruby/bundle/ruby/2.2.0\" GEM_HOME=\"/app/heroku/ruby/bundle/ruby/2.2.0\" RAILS_ENV=production SECRET_KEY_BASE=\"$(openssl rand -base64 32)\" HOME=/app/user/" > /app/.profile.d/ruby.sh
+RUN echo "cd /app/user/" > /app/.profile.d/home.sh
 
 ENTRYPOINT ["/usr/bin/init.sh"]

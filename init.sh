@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /app/user
-
 for SCRIPT in /app/.profile.d/*;
   do source $SCRIPT;
 done
