@@ -26,9 +26,9 @@ ENV PATH /app/user/bin:/app/heroku/ruby/bundle/ruby/2.2.0/bin:$PATH
 ONBUILD COPY ["Gemfile", "Gemfile.lock", "/app/user/"]
 ONBUILD RUN bundle install --path /app/heroku/ruby/bundle --deployment --without development:test --jobs 4
 # user's .bundle/config will override this
-ONBUILD RUN cp -rf .bundle /tmp/
+ONBUILD RUN cp -rf .bundle /app/heroku/ruby/
 ONBUILD ADD . /app/user
-ONBUILD RUN rm -rf /app/user/.bundle && cp -rf /tmp/.bundle /app/user/
+ONBUILD RUN rm -rf /app/user/.bundle && cp -rf /app/heroku/ruby/.bundle /app/user/
 
 # How to conditionally `rake assets:precompile`?
 ONBUILD RUN bundle exec rake assets:precompile
