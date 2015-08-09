@@ -33,7 +33,7 @@ ONBUILD RUN rm -rf /app/user/.bundle && cp -rf /app/heroku/ruby/.bundle /app/use
 # How to conditionally `rake assets:precompile`?
 ONBUILD RUN bundle exec rake assets:precompile
 ONBUILD ENV RAILS_ENV production
-ONBUILD ENV SECRET_KEY_BASE openssl rand -base64 32
+ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
 
 # export env vars during run time
 RUN mkdir -p /app/.profile.d/
