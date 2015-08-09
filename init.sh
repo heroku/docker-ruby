@@ -7,4 +7,4 @@ done
 rm -rf /app/user/.bundle
 cp -rf /app/heroku/ruby/.bundle /app/user/
 
-exec $*
+exec "$@"

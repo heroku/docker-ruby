@@ -9,9 +9,6 @@ ENV GEM_PATH /app/heroku/ruby/bundle/ruby/2.2.0
 ENV GEM_HOME /app/heroku/ruby/bundle/ruby/2.2.0
 RUN mkdir -p /app/heroku/ruby/bundle/ruby/2.2.0
 
-COPY ./init.sh /usr/bin/init.sh
-RUN chmod +x /usr/bin/init.sh
-
 # Install Ruby
 RUN mkdir -p /app/heroku/ruby/ruby-2.2.2
 RUN curl -s --retry 3 -L https://heroku-buildpack-ruby.s3.amazonaws.com/cedar-14/ruby-2.2.2.tgz | tar xz -C /app/heroku/ruby/ruby-2.2.2
@@ -43,5 +40,8 @@ ONBUILD ENV SECRET_KEY_BASE openssl rand -base64 32
 RUN mkdir -p /app/.profile.d/
 RUN echo "cd /app/user/" > /app/.profile.d/home.sh
 ONBUILD RUN echo "export PATH=\"$PATH\" GEM_PATH=\"$GEM_PATH\" GEM_HOME=\"$GEM_HOME\" RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=\"$SECRET_KEY_BASE\" HOME=\"$HOME\"" > /app/.profile.d/ruby.sh
+
+COPY ./init.sh /usr/bin/init.sh
+RUN chmod +x /usr/bin/init.sh
 
 ENTRYPOINT ["/usr/bin/init.sh"]
