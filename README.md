@@ -7,7 +7,7 @@ This image is for use with Heroku Docker CLI.
 Your project must contain the following files:
 
 * `Gemfile` and `Gemfile.lock`
-* Ruby 2.2.2
+* Ruby 2.2.3
 * `assets:precompile` rake task
 * `Procfile` (see [the Heroku Dev Center for details](https://devcenter.heroku.com/articles/procfile))
 
