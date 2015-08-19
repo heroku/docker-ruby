@@ -16,7 +16,7 @@ ONBUILD RUN ruby-util install-ruby /app/user/Gemfile /app/heroku/ruby /app/.prof
 ONBUILD RUN ruby-util rails-env /app/.profile.d/ruby.sh
 
 # Install Bundler
-ONBUILD RUN ruby-util install-bundler 1.9.7 /app/.profile.d/ruby.sh
+ONBUILD RUN ruby-util install-bundler 1.9.10 /app/.profile.d/ruby.sh
 
 # Run bundler to cache dependencies
 ONBUILD COPY ["Gemfile.lock", "/app/user/"]
