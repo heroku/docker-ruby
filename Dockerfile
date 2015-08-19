@@ -25,7 +25,7 @@ ENV BUNDLE_APP_CONFIG /app/heroku/ruby/.bundle/config
 
 # Run bundler to cache dependencies
 ONBUILD COPY ["Gemfile", "Gemfile.lock", "/app/user/"]
-ONBUILD RUN bundle install --path /app/heroku/ruby/bundle --deployment --without development:test --jobs 4
+ONBUILD RUN bundle install --path /app/heroku/ruby/bundle --jobs 4
 ONBUILD ADD . /app/user
 
 # How to conditionally `rake assets:precompile`?
