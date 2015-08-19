@@ -21,14 +21,12 @@ ENV PATH /app/heroku/ruby/node-0.12.7/bin:$PATH
 # Install Bundler
 RUN gem install bundler -v 1.9.10 --no-ri --no-rdoc
 ENV PATH /app/user/bin:/app/heroku/ruby/bundle/ruby/2.2.0/bin:$PATH
+ENV BUNDLE_APP_CONFIG /app/heroku/ruby/.bundle/config
 
 # Run bundler to cache dependencies
 ONBUILD COPY ["Gemfile", "Gemfile.lock", "/app/user/"]
 ONBUILD RUN bundle install --path /app/heroku/ruby/bundle --deployment --without development:test --jobs 4
-# user's .bundle/config will override this
-ONBUILD RUN cp -rf .bundle /app/heroku/ruby/
 ONBUILD ADD . /app/user
-ONBUILD RUN rm -rf /app/user/.bundle && cp -rf /app/heroku/ruby/.bundle /app/user/
 
 # How to conditionally `rake assets:precompile`?
 ONBUILD ENV RAILS_ENV production
