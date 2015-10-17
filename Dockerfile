@@ -4,9 +4,9 @@ MAINTAINER Terence Lee <terence@heroku.com>
 RUN mkdir -p /app/user
 WORKDIR /app/user
 
-ENV GEM_PATH /app/heroku/ruby/bundle/ruby/2.2.0
-ENV GEM_HOME /app/heroku/ruby/bundle/ruby/2.2.0
-RUN mkdir -p /app/heroku/ruby/bundle/ruby/2.2.0
+ENV GEM_PATH /app/heroku/ruby/bundle/ruby/2.2.3
+ENV GEM_HOME /app/heroku/ruby/bundle/ruby/2.2.3
+RUN mkdir -p /app/heroku/ruby/bundle/ruby/2.2.3
 
 # Install Ruby
 RUN mkdir -p /app/heroku/ruby/ruby-2.2.3
@@ -20,7 +20,7 @@ ENV PATH /app/heroku/ruby/node-0.12.7/bin:$PATH
 
 # Install Bundler
 RUN gem install bundler -v 1.9.10 --no-ri --no-rdoc
-ENV PATH /app/user/bin:/app/heroku/ruby/bundle/ruby/2.2.0/bin:$PATH
+ENV PATH /app/user/bin:/app/heroku/ruby/bundle/ruby/2.2.3/bin:$PATH
 ENV BUNDLE_APP_CONFIG /app/heroku/ruby/.bundle/config
 
 # Run bundler to cache dependencies
