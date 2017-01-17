@@ -8,30 +8,6 @@ COPY ./heroku-docker-ruby-util /usr/local/bin/ruby-util
 RUN chmod +x /usr/local/bin/ruby-util
 RUN mkdir -p /app/heroku/ruby/
 
-# Install Ruby
-ONBUILD COPY ["Gemfile", "/app/user/"]
-ONBUILD RUN ruby-util install-ruby /app/user/Gemfile /app/heroku/ruby /app/.profile.d/ruby.sh
-
-# Setup ruby env
-ONBUILD RUN ruby-util rails-env /app/.profile.d/ruby.sh
-
-# Install Bundler
-ONBUILD RUN ruby-util install-bundler 1.9.10 /app/.profile.d/ruby.sh
-
-# Run bundler to cache dependencies
-ONBUILD COPY ["Gemfile.lock", "/app/user/"]
-ONBUILD RUN ruby-util bundle-install /app/heroku/ruby/bundle /app/.profile.d/ruby.sh
-# user's .bundle/config will override this
-ONBUILD RUN cp -rf .bundle /app/heroku/ruby/
-ONBUILD ADD . /app/user
-ONBUILD RUN rm -rf /app/user/.bundle && cp -rf /app/heroku/ruby/.bundle /app/user/
-
-# Install Node
-ONBUILD RUN ruby-util install-node 0.12.7 /app/heroku/ruby/ /app/.profile.d/ruby.sh
-
-# run assets:precompile if the task exists
-ONBUILD RUN ruby-util assets-precompile /app/user/Rakefile /app/.profile.d/ruby.sh
-
 RUN mkdir -p /app/.profile.d/
 RUN echo "cd /app/user/" > /app/.profile.d/home.sh
 
