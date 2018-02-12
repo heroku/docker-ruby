@@ -14,7 +14,7 @@ RUN curl -s --retry 3 -L https://heroku-buildpack-ruby.s3.amazonaws.com/cedar-14
 ENV PATH /app/heroku/ruby/ruby-2.2.3/bin:$PATH
 
 # Install Node
-RUN curl -s --retry 3 -L http://s3pository.heroku.com/node/v0.12.7/node-v0.12.7-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/
+RUN curl -s --retry 3 -L https://s3pository.heroku.com/node/v0.12.7/node-v0.12.7-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/
 RUN mv /app/heroku/ruby/node-v0.12.7-linux-x64 /app/heroku/ruby/node-0.12.7
 ENV PATH /app/heroku/ruby/node-0.12.7/bin:$PATH
 
